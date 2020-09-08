@@ -94,7 +94,7 @@ class Game extends React.Component {
         'Go to move #' + move :
         'Go to game start';
       return (
-        <li>
+        <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
@@ -104,7 +104,8 @@ class Game extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      const isDraw = current.squares.filter( x => x !== null ).length === 9;
+      status = isDraw ? 'Game is a draw' : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return (
       <div className="game">
